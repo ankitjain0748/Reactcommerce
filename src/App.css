@@ -1,0 +1,28 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+
+#signup h1 {
+  color: rgb(161, 161, 165);
+  margin-top: 8px;
+  margin-bottom: 20px;
+}
+#signup img{
+  width:50px;
+  height:50px;
+
+  }
+
+  .container {
+    display: flex;
+    align-items: center; /* Vertical alignment to center */
+    justify-content: center; /* Horizontal alignment to center */
+    margin-top: 20px; /* Adjust the gap as needed */
+    margin-bottom: 20px; /* Adjust the gap as needed */
+}
+
+#signup button {
+  color: black;
+  background-color: green;
+}
