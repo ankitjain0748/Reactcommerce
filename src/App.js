@@ -6,13 +6,14 @@ import Forget from './Components/Forget';
 import Resetpass from './Components/ResetPass';
 import Header from './Components/Header';
 import Footer from './Components/Footer';
+import PrivateRoute from './Routers/PrivateRouter';
 function App() {
   return (
     <div className="App">
      <Router>
       <Header/>
      <Routes>
-      <Route path= "/forget" element={<Forget/>}/>
+      <Route path= "/forget" element={<PrivateRoute><Forget/></PrivateRoute>}/>
       <Route path= "/signup" element={<Signup/>}/>
       <Route path='/' element={<Login/>}/>
       <Route path ='/reset' element={<Resetpass/>}/>
