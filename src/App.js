@@ -13,7 +13,7 @@ function App() {
      <Router>
       <Header/>
      <Routes>
-      <Route path= "/forget" element={<PrivateRoute><Forget/></PrivateRoute>}/>
+      <Route path= "/forget" element={<Forget/>}/>
       <Route path= "/signup" element={<Signup/>}/>
       <Route path='/' element={<Login/>}/>
       <Route path ='/reset' element={<Resetpass/>}/>
