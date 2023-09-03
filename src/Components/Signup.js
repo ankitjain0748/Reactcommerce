@@ -1,7 +1,47 @@
 import { Link } from "react-router-dom";
 import toast, { Toaster } from 'react-hot-toast';
+import { useState } from "react";
+import User from "../api/User";
+
 
 function Signup() {
+
+
+
+
+  const[Data ,setData]=  useState({
+    username:"",
+    name:"",
+    number:"",
+    password: '',
+    confirm_password: '',
+    email: '',
+    })
+
+
+    const handleInputs = (e) => {
+        let valueattr = e.target.value;
+        let nameattr = e.target.name;
+        setData({ ...Data, [nameattr]: valueattr });
+        console.table(Data);
+    }
+
+    const handleFormSubmit = async (e) => {
+        e.preventDefault();
+        const main = new User();
+        console.log("main", main);
+        const response = main.login(Data);
+        response.then((res) => {
+            console.log(res);
+            toast.success(res.data.msg)
+        }).catch((err) => {
+            const error = err.errors;
+            toast.error(error)
+            console.log(error);
+        });
+    };
+
+
     return (
         <section id="signup">
             <div class="bg-grey-lighter min-h-screen flex flex-col">
@@ -14,18 +54,27 @@ function Signup() {
                         <form>
                             <div>
                                 <label>Full Name</label>
-                                <input type="text" class="block border border-grey-light w-full p-3 rounded mb-4"
-                                    name="fullname" placeholder="Full Name" />
+                                <input type="text"
+                                onChange={handleInputs}
+                                defaultValue={User.name}
+                                class="block border border-grey-light w-full p-3 rounded mb-4"
+                                    name="name"
+                                     placeholder="Full Name" />
                             </div>
                             <div>
                                 <label>User Name</label>
                                 <input type="text" class="block border border-grey-light w-full p-3 rounded mb-4"
-                                    name="fullname" placeholder="UserName" />
+                                    name="username" 
+                                    onChange={handleInputs}
+                                    defaultValue={User.username}
+                                    placeholder="UserName" />
                             </div>
                             <div>
                                 <label>Mobile Number</label>
-                                <input type="number" class="block border border-grey-light w-full p-3 rounded mb-4"
-                                    name="mobile" placeholder="mobile" />
+                                <input type="number" 
+                                onChange={handleInputs}
+                                defaultValue={User.number}class="block border border-grey-light w-full p-3 rounded mb-4"
+                                    name="number" placeholder="mobile" />
                             </div>
                             <div>
                                 <label>
@@ -33,6 +82,8 @@ function Signup() {
                                 </label>
                                 <input
                                     type="text"
+                                    onChange={handleInputs}
+                                    defaultValue={User.email}
                                     class="block border border-grey-light w-full p-3 rounded mb-4"
                                     name="email"
                                     placeholder="Email" />
@@ -44,7 +95,9 @@ function Signup() {
                                 <input
                                     type="password"
                                     class="block border border-grey-light w-full p-3 rounded mb-4"
-                                    name="confirm_password"
+                                    name="password"
+                                    onChange={handleInputs}
+                                    defaultValue={User.password}
                                     placeholder=" Password" />
                             </div>
                             <div>
@@ -53,6 +106,8 @@ function Signup() {
                                     type="password"
                                     class="block border border-grey-light w-full p-3 rounded mb-4"
                                     name="confirm_password"
+                                    onChange={handleInputs}
+                                    defaultValue={User.confirm_password}
                                     placeholder="Confirm Password" />
                             </div>
                             <div class="text-center text-sm text-grey-dark mt-4 mb-3 mr-2">
@@ -65,6 +120,7 @@ function Signup() {
                             </div>
                             <button
                                 type="submit"
+                                onClick={handleFormSubmit}
                                 class="w-full text-center py-3 rounded  focus:outline-none my-1"
                             >Create Account</button>
                         </form>
